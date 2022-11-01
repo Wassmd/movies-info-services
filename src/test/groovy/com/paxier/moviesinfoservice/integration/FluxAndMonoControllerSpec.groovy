@@ -1,4 +1,4 @@
-package com.paxier.moviesinfoservice.unit
+package com.paxier.moviesinfoservice.integration
 
 import com.paxier.moviesinfoservice.IntegrationSpec
 import com.paxier.moviesinfoservice.controller.FluxAndMonoController
