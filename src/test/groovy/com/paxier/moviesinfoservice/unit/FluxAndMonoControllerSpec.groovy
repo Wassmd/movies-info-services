@@ -30,4 +30,16 @@ class FluxAndMonoControllerSpec extends IntegrationSpec {
             assert responseBody == "Hello World"
         })
     }
+
+    def 'flux endpoint return 3 elements'() {
+        when: 'the gateway is called'
+        def responseSpec = webTestClient
+                .get()
+                .uri("/flux")
+                .exchange()
+
+        then: 'a bad request status code is returned in the response'
+        responseSpec.expectStatus().isOk()
+        responseSpec.expectBodyList(Integer.class).hasSize(3)
+    }
 }
