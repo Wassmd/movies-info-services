@@ -1,1 +1,21 @@
 curl http://localhost:8080/flux
+
+create  movieInfo:
+---------------
+curl -i \
+-d '{"name": "Batman Begins", "year":2005, "cast": ["Christine Bale","Michael Cane"], "releaseDate": "2005-06-15"}' \
+-H  "Content-Type: application/json" \
+-X POST http://localhost:8080/v1/movieinfos
+
+Get All Movie Infos
+-------------------
+curl -i \
+-H  "Content-Type: application/json" \
+-X GET http://localhost:8080/v1/movieinfos
+
+Get Movie info By Id
+--------------------
+curl -i \
+-H  "Content-Type: application/json" \
+-X GET http://localhost:8080/v1/movieinfos/636824a4fb8dae0f34ada589
+

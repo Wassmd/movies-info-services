@@ -18,6 +18,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 @SpringBootTest
 @AutoConfigureWebTestClient
 @ContextConfiguration(initializers = [WireMockContextInitializer.class])
+@ActiveProfiles("test")
 abstract class IntegrationSpec extends Specification {
     @Autowired
     WireMockServer wireMockServer
