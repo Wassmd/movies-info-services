@@ -22,4 +22,22 @@ class MovieInfoService(
     fun getAllMoviesInfos(): Flux<MovieInfo> {
         return movieInfoRepository.findAll()
     }
+
+    fun updateMovieInfo(updateMovieInfo: MovieInfo, id: String): Mono<MovieInfo> {
+        return movieInfoRepository.findById(id)
+            .flatMap { movieInfo ->
+                movieInfo.cast = updateMovieInfo.cast
+                movieInfo.name = updateMovieInfo.name
+                movieInfo.year = updateMovieInfo.year
+
+                 movieInfoRepository.save(movieInfo)
+            }
+    }
+
+    fun deleteMovieInfo(id: String): Mono<Void> {
+        return movieInfoRepository.findById(id)
+            .flatMap { movieInfo ->
+                movieInfoRepository.delete(movieInfo)
+            }
+    }
 }

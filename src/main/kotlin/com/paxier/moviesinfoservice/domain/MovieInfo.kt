@@ -14,8 +14,8 @@ import java.time.LocalDate
 @Document
 data class MovieInfo(
     @Id val id: String,
-    val name: String,
-    val year: Int,
-    val cast: List<String>,
-    val releaseDate: LocalDate
+    var name: String,
+    var year: Int,
+    var cast: List<String>,
+    var releaseDate: LocalDate
 )

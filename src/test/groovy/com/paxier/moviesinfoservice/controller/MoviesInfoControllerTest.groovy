@@ -1,15 +1,9 @@
 package com.paxier.moviesinfoservice.controller
 
-import com.paxier.moviesinfoservice.IntegrationSpec
 import com.paxier.moviesinfoservice.domain.MovieInfo
 import com.paxier.moviesinfoservice.repository.MovieInfoRepository
-import com.paxier.moviesinfoservice.service.MovieInfoService
-import org.bson.types.ObjectId
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.reactive.server.WebTestClient
@@ -79,5 +73,42 @@ class MoviesInfoControllerTest extends Specification {
         then: "the status code of the response is created 200 "
         webClientResponse.expectStatus().isOk()
         webClientResponse.expectBody().jsonPath('$.name').isEqualTo("Dark Knight rises1")
+    }
+
+    def 'Update movie Info'() {
+        given: "A movie Info"
+        def movieInfo = new MovieInfo("123", "Wasim the coder",1984, List.of("Christine Bale","Michael Cane"), LocalDate.parse("2005-06-15"))
+
+        when: "add movie info endpoint is called"
+        def webClientResponse = webTestClient
+                .put()
+                .uri("/v1/movieinfos/abc")
+                .bodyValue(movieInfo)
+                .exchange()
+
+        then: "the status code of the response is 200 "
+        webClientResponse.expectStatus().isOk()
+        webClientResponse.expectBody().jsonPath('$.name').isEqualTo("Wasim the coder")
+    }
+
+    def 'Delete a movie Info'() {
+        when: "movie info endpoint is called"
+        def webClientResponse = webTestClient
+                .delete()
+                .uri("/v1/movieinfos/abc")
+                .exchange()
+
+        then: "the status code of the response is 200 "
+        webClientResponse.expectStatus().isOk()
+
+        then: "get movie infos endpoint is called"
+        def webClientResponse1 = webTestClient
+                .get()
+                .uri("/v1/movieinfos")
+                .exchange()
+
+        then: "the status code of the response is created 200 "
+        webClientResponse1.expectStatus().isOk()
+        webClientResponse1.expectBodyList(MovieInfo.class).hasSize(2)
     }
 }
