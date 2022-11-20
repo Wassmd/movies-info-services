@@ -40,4 +40,8 @@ class MovieInfoService(
                 movieInfoRepository.delete(movieInfo)
             }
     }
+
+    fun getMovieInfosByYear(year: Int): Flux<MovieInfo> {
+        return movieInfoRepository.findByYear(year)
+    }
 }

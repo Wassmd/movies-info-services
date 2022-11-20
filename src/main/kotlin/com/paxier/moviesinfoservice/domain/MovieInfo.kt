@@ -7,6 +7,9 @@ import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDate
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Positive
 
 @Data
 @NoArgsConstructor
@@ -14,8 +17,8 @@ import java.time.LocalDate
 @Document
 data class MovieInfo(
     @Id val id: String,
-    var name: String,
-    var year: Int,
+    @field:NotBlank(message = "Movie name should be valid ") var name: String,
+    @field:Positive(message = "Movie year must be positive number ") var year: Int,
     var cast: List<String>,
     var releaseDate: LocalDate
 )
