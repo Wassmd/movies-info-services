@@ -1,21 +1,34 @@
-curl http://localhost:8080/flux
+curl http://localhost:8081/flux
 
 create  movieInfo:
 ---------------
 curl -i \
 -d '{"name": "Batman Begins", "year":2005, "cast": ["Christine Bale","Michael Cane"], "releaseDate": "2005-06-15"}' \
 -H  "Content-Type: application/json" \
--X POST http://localhost:8080/v1/movieinfos
+-X POST http://localhost:8081/v1/movieinfos
+
+curl -i \
+-d '{"id":"1","name": "Face Off", "year":1997, "cast": ["Nicolas Cage","John Trevolta"], "releaseDate": "1997-06-15"}' \
+-H  "Content-Type: application/json" \
+-X POST http://localhost:8081/v1/movieinfos
+
+curl -i \
+-d '{"name": "Batman Begins", "year":2005, "cast": ["Christine Bale","Michael Cane"], "releaseDate": "2005-06-15"}' \
+-H  "Content-Type: application/json" \
+-X POST http://localhost:8081/v1/movieinfos
+
+curl -i \
+-d '{"name": "Batman Begins", "year":2005, "cast": ["Christine Bale","Michael Cane"], "releaseDate": "2005-06-15"}' \
+-H  "Content-Type: application/json" \
+-X POST http://localhost:8081/v1/movieinfos
 
 Get All Movie Infos
 -------------------
-curl -i \
--H  "Content-Type: application/json" \
--X GET http://localhost:8080/v1/movieinfos
+curl GET http://localhost:8081/v1/movieinfos
 
 Get Movie info By Id
 --------------------
 curl -i \
 -H  "Content-Type: application/json" \
--X GET http://localhost:8080/v1/movieinfos/636824a4fb8dae0f34ada589
+-X GET http://localhost:8081/v1/movieinfos/636824a4fb8dae0f34ada589
 
